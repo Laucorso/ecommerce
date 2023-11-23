@@ -41,14 +41,16 @@
         </div>
         <div>
             @if(count($selectedCategory)>0)
-            <div class="flex">
+            <div class="mr-4 ml-4 flex gap-4">
                 @foreach($selectedCategory as $key=>$value)
                     @php
                         $cate = App\Models\Category::find($key);
                     @endphp
-                    <div class="m-5 bg-white shadow-xl uppercase font-bold text-blue-800 px-2 py-1">
-                        {{ $cate->name }}
-                        <span>X</span>
+                    <div class="flex items-center mt-5 mb-5 bg-blue-800 shadow-xl uppercase font-bold text-white px-2 py-1">
+                        <p>{{ $cate->name }}</p>
+                        <span class="cursor-pointer ml-4 material-symbols-outlined" wire:click="unsetCategoryFilter({{$key}})">
+                            backspace
+                        </span>
                     </div>
                 @endforeach
             </div>
@@ -116,7 +118,6 @@
             @this.on('product-added', (event) => {
                 var message = event[0].message;
                 toastr.success(message);
-                @this.dispatch('update-cart'); 
             });
         });
 
@@ -125,9 +126,16 @@
                 var message = event[0].message;
                 toastr.success(message);
                 // @this.dispatch('update-cart'); 
-
             });
         });
+
+        // document.addEventListener('livewire:initialized', () => {
+        //     @this.on('update-card', (event) => {
+
+        //     });
+        // });
+
+
 
         </script>
 </div>

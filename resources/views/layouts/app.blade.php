@@ -98,6 +98,19 @@
                 min-width:850px;
             }
 
+            @keyframes slideUp {
+                /* 0% {
+                    transform: translateY(0);
+                } */
+                100% {
+                    transform: translateY(-300%);
+                    opacity: 0;
+                }
+            }
+
+            .animate-slide-up {
+                animation: slideUp 0.8s ease-out;
+            }
         </style>
 
         @livewireStyles

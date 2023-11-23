@@ -8,6 +8,8 @@ use Livewire\WithPagination;
 use App\Models\Category;
 use App\Models\ProductCategory;
 
+use Livewire\Attributes\On; 
+
 class Products extends Component
 {
     public $categories =[], $itemsToShop = [], $selectedCat = [], $selectedCategory =[];
@@ -16,7 +18,7 @@ class Products extends Component
     public function mount(){
 
     }
-    
+
     public function render()
     {        
 
@@ -31,6 +33,8 @@ class Products extends Component
             'products'=>$products,
         ]);
     }
+    
+    #[On('update-cart-from-single')] 
     public function addToShopping($id){
         $this->itemsToShop[] = $id;
         if (!session()->has('cart')) {

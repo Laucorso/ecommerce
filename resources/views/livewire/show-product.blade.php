@@ -24,21 +24,40 @@
             <h2 class="text-xl font-semibold">{{ $product->title }}</h2>
             <div class="flex items-center justify-between">
                 <p class="text-gray-800 font-bold mt-4">{{ $product->price }}€</p>
-
-                <div class="flex items-center mt-8">
-                    <button class="bg-gray-600 text-white px-4 py-2 rounded-l">-</button>
-                    @php
-                        $count = isset(session('productCounter')[$product->id]) ? session('productCount', [])[$prod->id] : 0;
-                    @endphp
-                    <input type="text" class="w-10 text-center border" value="{{$count}}">
-                    <button class="bg-gray-600 text-white px-4 py-2 rounded-r">+</button>
+                <div class="flex items-center gap-4">
+                    @if($showIcon)
+                        <div id="smiley" class="material-symbols-outlined mt-8">
+                            sentiment_satisfied
+                        </div>
+                    @endif
+                    <div class="flex items-center mt-8">
+                        <button class="bg-gray-600 text-white px-4 py-2 rounded-l" wire:click="">-</button>
+                        @php
+                            $count = session('productCount', [])[$product->id] ? session('productCount', [])[$product->id] : 0;
+                        @endphp
+                        <input type="text" class="w-10 text-center border" value="{{$count}}">
+                        <button class="bg-gray-600 text-white px-4 py-2 rounded-r" wire:click="addProduct">+</button>
+                    </div>
                 </div>
             </div>
             <p class="text-gray-600 mt-8">{{ $product->description }}</p>
-
+          
         </div>
     </div>   
     
     <script src="{{ url('/lightbox/dist/js/lightbox.min.js') }}"></script>
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('smiley-face', () => {
+
+                // Agregar un temporizador para ocultar el elemento después de 3 segundos
+                setTimeout(function () {
+                    document.getElementById('smiley').classList.add('animate-slide-up');
+                    @this.set('showIcon', false);
+                }, 3000);
+
+            });        
+        });
+    </script>
 
 </div>
