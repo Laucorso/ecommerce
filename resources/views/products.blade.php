@@ -4,11 +4,14 @@
             Our Products
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-9xl mx-auto sm:px-4 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl ">
-                @livewire('products')
+                @if(!isset($id))
+                    @livewire('products')
+                @else
+                    @livewire('show-product', ['id'=>$id])
+                @endif
             </div>
         </div>
     </div>

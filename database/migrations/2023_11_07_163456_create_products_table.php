@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->float('price');
             $table->string('image_path');
+            $table->json('secondary_images');
             $table->timestamps();
         });
     }

@@ -20,8 +20,8 @@ class ProductFactory extends Factory
             'title'=>$this->faker->sentence,
             'image_path'=>$this->faker->imageUrl(640, 480),
             'description'=>$this->faker->paragraph,
-            'price'=>$this->faker->randomElement([58.99,125.00,38.50,102.50, 300.50])
-
+            'price'=>$this->faker->randomElement([58.99,125.00,38.50,102.50, 300.50]),
+            'secondary_images' => json_encode([$this->faker->imageUrl(640, 480), $this->faker->imageUrl(640, 480), $this->faker->imageUrl(640, 480)]),      
         ];
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +28,10 @@ Route::middleware([
     Route::get('/home', function () {
         return view('home');
     });
-    Route::get('/products', function () {
-        return view('products');
-    });
-
+    // Route::get('/products', function () {
+    //     return view('products');
+    // });
+    Route::get('/products/{id?}', [ProductController::class, 'show'])->name('products');
     Route::get('/billing', [BillingController::class, 'mountBill'])->name('billing');
     Route::get('/shopping-cart', [CartController::class, 'MountShoppingCart'])->name('shopping-cart');
 

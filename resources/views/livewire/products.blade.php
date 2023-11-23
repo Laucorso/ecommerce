@@ -57,9 +57,11 @@
             <div class="flex flex-wrap justify-center gap-5 p-6">
                 @foreach($products as $prod)
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[300px]">
-                    <div  class="p-3 bg-cover bg-center h-64 cursor-pointer" style="background-image:url('{{$prod->image_path}}')" wire:click="showProduct({{$prod->id}})">
-                        <span class=" ml-2 bg-blue-100 text-blue-800 font-bold mr-2 px-2.5 py-0.5 text-sm rounded dark:bg-blue-900 dark:text-blue-300">{{$prod->price}}€</span>
-                    </div>
+                    <a href="{{route('products',['id'=>$prod->id])}}">
+                        <div class="p-3 bg-cover bg-center h-64 cursor-pointer" style="background-image:url('{{$prod->image_path}}')">
+                            <span class=" ml-2 bg-blue-100 text-blue-800 font-bold mr-2 px-2.5 py-0.5 text-sm rounded dark:bg-blue-900 dark:text-blue-300">{{$prod->price}}€</span>
+                        </div>
+                    </a>
                     <div class="p-4 flex flex-col">
                         <div class="h-[14rem]">
                         <h2 class="text-xl font-semibold text-gray-800" style="font-family: 'Oswald', sans-serif">{{$prod->title}}</h2>
@@ -92,9 +94,6 @@
                             <!-- </button> -->
                         </div>
                     </div>
-                    <p id="shopping-msg-{{$prod->id}}" class="text-red-600 hidden" >
-                        Añadido!
-                    </p>
                 </div>
                 @endforeach
             </div>

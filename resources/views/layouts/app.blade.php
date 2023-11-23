@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js">
         
         <!-- Scripts -->
 
@@ -88,6 +89,14 @@
                 transition: transform 0.5s ease-in-out;
                 transform: scale(1.2); /* Hace que el ícono sea un 20% más grande al hacer hover */
             }
+            .lb-outerContainer {
+                min-width: 850px;
+            }
+
+            .lb-image {
+                min-height: 750px;
+                min-width:850px;
+            }
 
         </style>
 
@@ -121,12 +130,6 @@
         @livewireScripts
 
         <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
-
-        <script>
-            function fuck(){
-                console.log('error');
-            }
-        </script>
 
     </body>
 </html>
