@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\CartController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,6 @@ Route::middleware([
     });
 
     Route::get('/billing', [BillingController::class, 'mountBill'])->name('billing');
-    Route::get('/shopping-cart', [BillingController::class, 'MountShoppingCart'])->name('shopping-cart');
+    Route::get('/shopping-cart', [CartController::class, 'MountShoppingCart'])->name('shopping-cart');
 
 });

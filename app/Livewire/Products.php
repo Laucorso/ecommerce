@@ -13,6 +13,10 @@ class Products extends Component
     public $categories =[], $itemsToShop = [], $selectedCat = [], $selectedCategory =[];
     use WithPagination;
 
+    public function mount(){
+
+    }
+    
     public function render()
     {        
 
@@ -29,9 +33,34 @@ class Products extends Component
     }
     public function addToShopping($id){
         $this->itemsToShop[] = $id;
-        $this->dispatch('product-added', ['message' => 'Producto añadido con éxito.', 'id'=>$id]);
-        //array_push($this->itemsToShop, $id);
+        if (!session()->has('cart')) {
+            session(['cart' => []]);
+        }
+        if (!session()->has('productCount-'.$id)) {
+            session(['productCount-'.$id => []]);
+        }
+
+        $cart = session('cart', []);
+        $productCount = session('productCount', []);
+
+        if (in_array($id, $cart)) {
+            if (isset($productCount[$id])) {
+                $productCount[$id] = $productCount[$id]+1;
+            } else {
+                $productCount[$id] = 1;
+            }
+        } else {
+            $cart[] = $id;
+            $productCount[$id] = 1;
+        }
+        session(['cart' => $cart, 'productCount' => $productCount]);
+
+
+        $this->dispatch('product-added', ['message' => 'Producto añadido con éxito.']);
+        $this->dispatch('update-cart')->to(CounterCartItems::class);
+
     }
+
     public function removeFromShopping($id){
        $index = array_search($id, $this->itemsToShop);
        foreach ($this->itemsToShop as $key => $value) {

@@ -73,9 +73,13 @@
                                         remove_shopping_cart
                                     </span>
                                 @endif
-                                @if(in_array($prod->id, $itemsToShop))
+                                @if(isset(session('productCount', [])[$prod->id]))
                                 <div class="flex items-center">
-                                    <span class="mr-2">({{ array_count_values($itemsToShop)[$prod->id] }})</span>
+                                    @php
+                                        $count = session('productCount', [])[$prod->id] ?? [];
+                                        $count = is_array($count) ? 0 : $count;
+                                    @endphp
+                                    <span class="mr-2">({{$count}})</span>
                                     <span class="shop-icon material-symbols-outlined text-blue-400 hover:text-blue-700 cursor-pointer" wire:click="addToShopping({{$prod->id}})">
                                         shopping_cart
                                     </span>
@@ -113,6 +117,7 @@
             @this.on('product-added', (event) => {
                 var message = event[0].message;
                 toastr.success(message);
+                @this.dispatch('update-cart'); 
             });
         });
 
@@ -120,6 +125,8 @@
             @this.on('product-removed', (event) => {
                 var message = event[0].message;
                 toastr.success(message);
+                // @this.dispatch('update-cart'); 
+
             });
         });
 

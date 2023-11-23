@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ url('/home') }}">
                         
-                        <x-application-mark class="block h-9 w-auto" />
+                        <x-application-mark class="block h-5 w-auto" />
                     </a>
                 </div>
 
@@ -89,11 +89,18 @@
 
                 <!-- Settings Dropdown -->
                 <div class="ms-3 relative flex items-center">
-                    <x-nav-link href="{{ url('/shopping-items') }}" :active="request()->routeIs('dashboard')" style="font-family: 'Oswald', sans-serif">
-                        <span class="shop-icon material-symbols-outlined text-blue-400 hover:text-blue-700 cursor-pointer">
+                    {{-- @php
+                        $counterPrd = session('productCount', []);
+                        $suma = collect($counterPrd)->sum();
+                    @endphp --}}
+                    <a href="{{ url('/shopping-cart') }}" class="flex items-center gap-1"style="font-family: 'Oswald', sans-serif">
+                        <span class="material-symbols-outlined cursor-pointer text-blue-700">
                             shopping_cart
                         </span>
-                    </x-nav-link>
+                        {{-- <span class="cursor-pointer text-blue-700">({{$suma}})</span> --}}
+                        @livewire('counter-cart-items')
+                    </a>
+                    
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
