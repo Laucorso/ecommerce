@@ -20,7 +20,6 @@ class ArticleFactory extends Factory
             'title'=>$this->faker->sentence,
             'description'=>$this->faker->paragraph,
             'body'=>$this->faker->paragraph,
-
         ];
     }
 }
