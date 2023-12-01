@@ -17,6 +17,10 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
+
+
+
+            
             'title'=>$this->faker->sentence,
             'description'=>$this->faker->paragraph,
             'body'=>$this->faker->paragraph,
